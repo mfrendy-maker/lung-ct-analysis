@@ -1,0 +1,8 @@
+__pycache__/
+*.egg-info/
+.venv/
+data/
+outputs/
+*.nii.gz
+*.dcm
+*.pkl

@@ -1,0 +1,26 @@
+[project]
+name = "lung-ct-analysis"
+version = "0.1.0"
+description = "Lung CT lesion detection, severity grading and abnormality classification (CMB-LCA vs TotalSegmentator-derived normal lungs)"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "scikit-image",
+  "scikit-learn",
+  "SimpleITK",
+  "nibabel",
+  "pandas",
+  "tcia_utils",
+  "TotalSegmentator",
+]
+
+[project.scripts]
+lungct = "lungct.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
