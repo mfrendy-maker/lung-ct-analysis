@@ -1,5 +1,9 @@
 # lung-ct-analysis
 
+> Superseded by [Lung-Cancer-Imaging-Analysis](https://github.com/mfrendy-maker/Lung-Cancer-Imaging-Analysis),
+> which contains this lesion pipeline plus tests, CI, a torch-free lung mask and cancer-vs-normal comparison.
+> This repository is kept only as the original prototype.
+
 Detects lung lesions on CT, grades severity and classifies the abnormality.
 
 - Cancer data: [CMB-LCA on TCIA](https://www.cancerimagingarchive.net/collection/cmb-lca/)
