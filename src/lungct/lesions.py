@@ -60,18 +60,20 @@ def detect_lesions(hu: np.ndarray, lung: np.ndarray, spacing, min_diam_mm: float
     labels, n = ndi.label(candidates)
     voxel_vol = float(np.prod(spacing))
     lesions = []
+    kept = np.zeros_like(labels)
     for i in range(1, n + 1):
         m = labels == i
         vol = m.sum() * voxel_vol
         d = 2 * (3 * vol / (4 * np.pi)) ** (1 / 3)
         if d < min_diam_mm:
             continue
+        kept[m] = i
         mean_hu = float(hu[m].mean())
         sph = _sphericity(m, spacing)
         kind = _kind(d, mean_hu, sph)
         c = tuple(int(x) for x in ndi.center_of_mass(m))
         lesions.append(Lesion(i, c, round(vol, 1), round(d, 1), round(mean_hu, 1), round(sph, 2), kind, _severity(d, kind, sph)))
-    return lesions
+    return lesions, kept
 
 
 def classify_scan(lesions) -> dict:

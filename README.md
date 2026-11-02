@@ -17,7 +17,7 @@ extract lung masks; for normal-lung controls use CT scans with no lesions
 4. Each lesion gets diameter, mean HU, sphericity, a type
    (ground-glass / part-solid / solid / spiculated nodule / mass) and a severity
    (low / moderate / high / critical) using Lung-RADS-style size thresholds.
-5. Scan label: `normal` (no lesions) or `abnormal` with worst severity. Output: `outputs/report.json`.
+5. Scan label: `normal` (no lesions) or `abnormal` with worst severity. Output: `outputs/report.json` plus annotated PNGs in `outputs/images/` (one per lesion: axial slice, lung outline, lesion contour coloured by severity, type/size/severity title; or `overview.png` for normal scans).
 
 ## Install
 ```

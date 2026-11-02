@@ -5,7 +5,7 @@ from pathlib import Path
 import nibabel as nib
 import numpy as np
 
-from . import data, lesions, segment
+from . import data, lesions, segment, viz
 
 
 def analyse(ct_nifti: str, work_dir: str, fast: bool = True) -> dict:
@@ -13,8 +13,10 @@ def analyse(ct_nifti: str, work_dir: str, fast: bool = True) -> dict:
     hu = np.asarray(img.dataobj, dtype=np.float32)
     spacing = img.header.get_zooms()[:3]
     lung = segment.segment_lungs(ct_nifti, work_dir, fast=fast)
-    found = lesions.detect_lesions(hu, lung, spacing)
-    return lesions.classify_scan(found)
+    found, labels = lesions.detect_lesions(hu, lung, spacing)
+    result = lesions.classify_scan(found)
+    result["images"] = viz.save_overlays(hu, lung, labels, found, str(Path(work_dir) / "images"), result["label"])
+    return result
 
 
 def main():
